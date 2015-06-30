@@ -5,21 +5,79 @@
  * @param  {Number} maxFibValue
  * @return {Number} sum
  */
-module.exports = function( maxFibValue ) {
-  var sum = 0;
+module.exports = {
 
-  // do your work here
-
-  return sum;
+  fibNums: fibonacciNums,
+  fibHighest: highestFibonacciNumber
 };
 
-exports.highestFibonacciNumber = function(maxFibValue){
+function fibonacciNums( maxFibValue ) {
+
+  if(typeof maxFibValue !== 'number') {
+
+    return new TypeError("highestFibonacciNumber requires a number type as input");
+  }
+
+  if(isNaN(maxFibValue)) {
+
+    return new TypeError("highestFibonacciNumber cannot take NaN as input");
+  }
+
+  var evenSum = recursiveEvenFibonacciSum(1,2,2);
+
+  function recursiveEvenFibonacciSum(previousToLastNumber, lastNumber, sum) {
+
+    highest = previousToLastNumber + lastNumber;
+
+    while(highest <= maxFibValue) {
+
+      if(highest%2 === 0) {
+
+        sum += highest;
+      }
+
+      previousToLastNumber = lastNumber;
+      lastNumber = highest;
+
+      sum = recursiveEvenFibonacciSum(previousToLastNumber, lastNumber, sum);
+    }
+
+    return sum;
+  };
+
+  return evenSum;
+};
+
+function highestFibonacciNumber(maxFibValue){
+
+  if(typeof maxFibValue !== 'number') {
+
+    return new TypeError("highestFibonacciNumber requires a number type as input");
+  }
+
+  if(isNaN(maxFibValue)) {
+
+    return new TypeError("highestFibonacciNumber cannot take NaN as input");
+  }
+
   var highest = 0;
 
-  //define your base case, validate your input
+  highest = recursiveHighestFibonacciNumber(1,2,highest);
 
+  function recursiveHighestFibonacciNumber(previousToLastNumber, lastNumber, highest) {
 
-  //do your work here
+    while(previousToLastNumber + lastNumber <= maxFibValue) {
+
+      highest = previousToLastNumber + lastNumber;
+
+      previousToLastNumber = lastNumber;
+      lastNumber = highest;
+
+      highest = recursiveHighestFibonacciNumber(previousToLastNumber, lastNumber, highest);
+    }
+
+    return highest;
+  };
 
   return highest;
 };
