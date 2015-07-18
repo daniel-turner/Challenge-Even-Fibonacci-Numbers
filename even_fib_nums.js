@@ -60,9 +60,7 @@ function highestFibonacciNumber(maxFibValue){
     return new TypeError("highestFibonacciNumber cannot take NaN as input");
   }
 
-  var highest = 0;
-
-  highest = recursiveHighestFibonacciNumber(1,2,highest);
+  var highest = recursiveHighestFibonacciNumber(1,2,2);
 
   function recursiveHighestFibonacciNumber(previousToLastNumber, lastNumber, highest) {
 
